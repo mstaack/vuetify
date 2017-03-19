@@ -24,10 +24,8 @@ export default {
       type: [Number, String],
       default: 100
     },
-    step: {
-      type: [Number, String],
-      default: 1
-    },
+    step: [Number, String],
+    stepSnap: Boolean,
     thumbLabel: Boolean,
     value: [Number, String],
     vertical: Boolean
@@ -40,7 +38,7 @@ export default {
         'input-group--active': this.isActive,
         'input-group--dirty': this.inputValue > this.min,
         'input-group--disabled': this.disabled,
-        'input-group--ticks': this.thumbLabel
+        'input-group--ticks': this.step
       }
     },
     inputValue: {
@@ -52,7 +50,7 @@ export default {
           this.inputWidth = this.calculateWidth(val)
         }
 
-        let value = parseInt(val)
+        let value = this.stepSnap ? Math.round(val / this.step) * this.step : parseInt(val)
         value = value < this.min ? this.min : value > this.max ? this.max : value
         this.lazyValue = value
 
@@ -116,6 +114,9 @@ export default {
 
   methods: {
     calculateWidth (val) {
+      if (this.stepSnap) {
+        return Math.round(val / this.step) * this.step
+      }
       return (val - this.min) / (this.max - this.min) * 100
     },
     calculateScale (scale) {
