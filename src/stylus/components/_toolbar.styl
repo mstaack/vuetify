@@ -4,26 +4,20 @@
 
 .toolbar
   background-color: $theme.primary
+  display: flex
   min-height: $toolbar-height
+  transition: .3s $transition.swing
   width: 100%
+  z-index: 2
   elevation(4)
   
-  &__tools
-    background-color: inherit
-    height: $toolbar-height
-
-  &__tools
+  &__pad
     align-items: center
     background-color: inherit
     display: flex
-    flex-wrap: wrap
-    height: $toolbar-height * 2
+    height: $toolbar-height
     position: relative
-    padding: $toolbar-height 0 $toolbar-padding-y 0
-    transition: .3s $transition.swing
-    width: 100%
-    will-change: padding-left
-    z-index: 2
+    width: 76px
 
     > *:first-child
       margin-left: $grid-gutter
@@ -38,6 +32,18 @@
       > *:last-child
         margin-right: $grid-gutter-mobile
 
+  &__tools
+    align-items: center
+    background-color: inherit
+    display: flex
+    flex-wrap: wrap
+    height: $toolbar-height
+    position: relative
+    padding: $spacers.three.y 0
+    transition: .3s $transition.swing
+    width: 100%
+    will-change: padding-left
+
     ul
       list-style: none
 
@@ -51,12 +57,24 @@
       height: 100%
 
   &--fixed
-    .toolbar__wrapper
-      position: fixed
+    position: fixed
+    
+    + main
+      padding-top: $toolbar-height
+    
+    &.toolbar--tools
+      + main
+        padding-top: $toolbar-height * 2
 
   &--absolute
-    .toolbar__wrapper
-      position: absolute
+    position: absolute
+
+    + main
+      padding-top: $toolbar-height
+    
+    &.toolbar--tools
+      + main
+        padding-top: $toolbar-height * 2
 
   &__sub
     flex: 1 0 100%
