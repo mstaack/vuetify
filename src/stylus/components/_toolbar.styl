@@ -3,53 +3,60 @@
     background: $grey.darken-4
 
 .toolbar
-  align-items: center
   background-color: $theme.primary
-  display: flex
-  flex-wrap: wrap
-  height: $toolbar-height
-  position: relative
-  padding: $toolbar-padding-y 0
-  transition: .3s $transition.swing
+  min-height: $toolbar-height
   width: 100%
-  will-change: padding-left
   elevation(4)
-  z-index: 2
+  
+  &__tools
+    background-color: inherit
+    height: $toolbar-height
 
-  > *:first-child
-    margin-left: $grid-gutter
+  &__tools
+    align-items: center
+    background-color: inherit
+    display: flex
+    flex-wrap: wrap
+    height: $toolbar-height * 2
+    position: relative
+    padding: $toolbar-height 0 $toolbar-padding-y 0
+    transition: .3s $transition.swing
+    width: 100%
+    will-change: padding-left
+    z-index: 2
 
-  > *:last-child
-    margin-right: $grid-gutter
-
-  @media $display-breakpoints.xs-only
     > *:first-child
-      margin-left: $grid-gutter-mobile
+      margin-left: $grid-gutter
 
     > *:last-child
-      margin-right: $grid-gutter-mobile
+      margin-right: $grid-gutter
 
-  ul
-    list-style: none
+    @media $display-breakpoints.xs-only
+      > *:first-child
+        margin-left: $grid-gutter-mobile
 
-  li
-    height: 100%
+      > *:last-child
+        margin-right: $grid-gutter-mobile
 
-  i
-    font-size: 24px
+    ul
+      list-style: none
 
-  .menu__activator
-    height: 100%
+    li
+      height: 100%
 
-  &--fixed, &--absolute
-    + main
-      padding-top: $toolbar-height
+    i
+      font-size: 24px
+
+    .menu__activator
+      height: 100%
 
   &--fixed
-    position: fixed
+    .toolbar__wrapper
+      position: fixed
 
   &--absolute
-    position: absolute
+    .toolbar__wrapper
+      position: absolute
 
   &__sub
     flex: 1 0 100%

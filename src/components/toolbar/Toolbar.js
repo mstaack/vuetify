@@ -9,6 +9,14 @@ export default {
     data.staticClass = data.staticClass ? `toolbar ${data.staticClass}` : 'toolbar'
     if (props.fixed) data.staticClass += ' toolbar--fixed'
 
-    return h('nav', data, children)
+    const pad = h('div', {
+      'class': 'toolbar__pad'
+    })
+
+    const tools = h('div', {
+      'class': 'toolbar__tools'
+    }, children)
+
+    return h('nav', data, [pad, tools])
   }
 }
